@@ -1,6 +1,7 @@
 import { AtSign, MessageCircle } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { siteConfig } from "@/config/site";
+import { Link } from "@/i18n/navigation";
 
 /** SOS footer: sage background, three columns separated by vertical rules, copyright strip. */
 export async function SiteFooter() {
@@ -20,13 +21,17 @@ export async function SiteFooter() {
         </section>
         <section className={columnStyle} aria-labelledby="footer-about">
           <h2 id="footer-about" className={headingStyle}>
-            {t("aboutTitle")}
+            <Link href="/about-us" className="hover:text-leaf-dark">
+              {t("aboutTitle")}
+            </Link>
           </h2>
           <p className={textStyle}>{t("about")}</p>
         </section>
         <section className={columnStyle} aria-labelledby="footer-contact">
           <h2 id="footer-contact" className={headingStyle}>
-            {t("contactTitle")}
+            <Link href="/contact-us" className="hover:text-leaf-dark">
+              {t("contactTitle")}
+            </Link>
           </h2>
           <ul className="flex flex-col items-start gap-2">
             {siteConfig.contact.phones.map((phone) => (

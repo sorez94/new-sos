@@ -110,3 +110,9 @@ export const createPreOrderSchema = z.object({
 export const cancelPreOrderSchema = z.object({ reason: z.string().trim().max(500).optional() }).optional();
 export const preOrderStatusSchema = z.object({ status: z.enum(preOrderStatuses), note: z.string().trim().max(1000).optional() });
 export const preOrderNoteSchema = z.object({ adminNote: z.string().trim().max(2000).nullable() });
+
+export const contactMessageSchema = z.object({
+  name: z.string().trim().min(2).max(80),
+  email: z.email(),
+  message: z.string().trim().min(10).max(2000),
+});

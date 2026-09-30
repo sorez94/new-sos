@@ -19,7 +19,7 @@ for field names. Validation rules are implemented in `src/mocks/server/schemas.t
 1. [Conventions](#1-conventions)
 2. [Data models](#2-data-models)
 3. [Authentication & profile](#3-authentication--profile)
-4. [Catalog (public)](#4-catalog-public)
+4. [Catalog & contact (public)](#4-catalog--contact-public)
 5. [Pre-orders (customer)](#5-pre-orders-customer)
 6. [Admin](#6-admin)
 7. [Endpoint summary](#7-endpoint-summary)
@@ -373,7 +373,7 @@ Response `200`: `User`. Errors: `401`, `422`.
 
 ---
 
-## 4. Catalog (public)
+## 4. Catalog & contact (public)
 
 Only `status = published` products are visible. Drafts/archived return `404`.
 
@@ -443,6 +443,20 @@ Response `200`: `ProductSummary[]` (no `meta`). Errors: `404`.
 
 ### 4.7 `GET /categories/slug/:slug`
 **Auth:** Public. Response `200`: `Category`. Errors: `404`.
+
+### 4.8 `POST /contact` — Contact message
+**Auth:** Public (the "Contact us" page).
+
+Request:
+```json
+{ "name": "Sara Ahmadi", "email": "sara@example.com", "message": "Do you make the Luna table in 180 cm?" }
+```
+Rules: `name` 2–80 chars, `email` valid address, `message` 10–2000 chars (all trimmed).
+
+Server behaviour: store the message and notify the team (email/SMS). Rate-limit by IP.
+
+Response `201`: `{ "data": { "id": "msg_x1", "createdAt": "..." } }`
+Errors: `422 VALIDATION_ERROR` (`details[].field` = `name` / `email` / `message`), `429 RATE_LIMITED`.
 
 ---
 
@@ -672,6 +686,7 @@ Response `200`: `PreOrder`.
 | GET | `/products/:id/related` | Public | `catalog.getRelatedProducts` |
 | GET | `/categories` | Public | `catalog.listCategories` |
 | GET | `/categories/slug/:slug` | Public | `catalog.getCategoryBySlug` |
+| POST | `/contact` | Public | `contact.send` |
 | POST | `/pre-orders` | Customer + complete profile | `preOrders.create` |
 | GET | `/pre-orders` | Customer | `preOrders.listMine` |
 | GET | `/pre-orders/:id` | Customer (owner) | `preOrders.getMine` |
@@ -707,5 +722,5 @@ Response `200`: `PreOrder`.
 6. **Transactions.** Creating a pre-order (reference sequence + snapshot) must be atomic. References must be unique.
 7. **Authorization.** Customer endpoints must scope by `userId`; return `404` for other users' resources.
 8. **Soft deletes** for products and categories are recommended; the API behaviour (404 after delete) stays the same.
-9. **Notifications** (not part of this contract yet): email/SMS on pre-order creation and status changes.
+9. **Notifications** (not part of this contract yet): email/SMS on pre-order creation and status changes, and on new contact messages (§4.8).
 10. **Search.** Substring match is sufficient initially; PostgreSQL full-text search (with Persian normalisation of ی/ي and ک/ك) is recommended later.

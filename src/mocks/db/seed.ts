@@ -533,6 +533,7 @@ export function createSeedDatabase(): MockDatabase {
     products: structuredClone(products),
     preOrders: structuredClone(preOrders),
     uploads: new Map(),
+    contactMessages: [],
     sequences: { preOrder: preOrders.length },
   };
 }

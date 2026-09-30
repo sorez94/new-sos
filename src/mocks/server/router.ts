@@ -8,6 +8,7 @@ import { adminProductRoutes } from "./handlers/admin-products";
 import { adminRoutes } from "./handlers/admin";
 import { authRoutes } from "./handlers/auth";
 import { catalogRoutes } from "./handlers/catalog";
+import { contactRoutes } from "./handlers/contact";
 import { preOrderRoutes } from "./handlers/pre-orders";
 import { profileRoutes } from "./handlers/profile";
 import { uploadRoutes } from "./handlers/uploads";
@@ -35,6 +36,7 @@ const routes: CompiledRoute[] = [
   ...authRoutes,
   ...profileRoutes,
   ...catalogRoutes,
+  ...contactRoutes,
   ...preOrderRoutes,
   ...adminRoutes,
   ...adminProductRoutes,

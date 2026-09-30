@@ -123,6 +123,24 @@ describe("pre-orders", () => {
   });
 });
 
+describe("contact", () => {
+  it("accepts a public message and validates fields", async () => {
+    const { contact } = servicesWithToken();
+    const receipt = await contact.send({ name: "Sara", email: "sara@example.com", message: "Do you ship to Shiraz?" });
+    expect(receipt.id).toMatch(/^msg_/);
+
+    await expect(contact.send({ name: "S", email: "not-an-email", message: "Hi" })).rejects.toMatchObject({
+      status: 422,
+      code: "VALIDATION_ERROR",
+      details: expect.arrayContaining([
+        expect.objectContaining({ field: "name" }),
+        expect.objectContaining({ field: "email" }),
+        expect.objectContaining({ field: "message" }),
+      ]),
+    });
+  });
+});
+
 describe("admin", () => {
   it("forbids customers and allows admins", async () => {
     const customer = await signIn("customer@example.com", "customer1234");

@@ -26,6 +26,8 @@ export function SiteHeader() {
   const links = [
     { href: "/", label: t("home") },
     { href: "/products", label: t("products") },
+    { href: "/about-us", label: t("about") },
+    { href: "/contact-us", label: t("contact") },
     ...(status === "authenticated" ? [{ href: "/account/pre-orders", label: t("myPreOrders") }] : []),
   ];
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`));
@@ -55,7 +57,7 @@ export function SiteHeader() {
         </Link>
 
         <nav aria-label={t("main")} className="absolute start-1/2 hidden -translate-x-1/2 md:block rtl:translate-x-1/2">
-          <ul className="flex gap-6 lg:gap-8">
+          <ul className="flex gap-4 lg:gap-8">
             {links.map(({ href, label }) => (
               <li key={href}>
                 <Link

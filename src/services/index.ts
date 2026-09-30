@@ -2,6 +2,7 @@ import type { ApiClient } from "@/lib/api/client";
 import { createAdminService } from "./admin.service";
 import { createAuthService } from "./auth.service";
 import { createCatalogService } from "./catalog.service";
+import { createContactService } from "./contact.service";
 import { createPreOrdersService } from "./pre-orders.service";
 import { createProfileService } from "./profile.service";
 
@@ -11,6 +12,7 @@ export function createServices(api: ApiClient) {
     auth: createAuthService(api),
     profile: createProfileService(api),
     catalog: createCatalogService(api),
+    contact: createContactService(api),
     preOrders: createPreOrdersService(api),
     admin: createAdminService(api),
   };
