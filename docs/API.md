@@ -565,6 +565,7 @@ Request body — `ProductInput` (`src/domain/product.ts`):
   "categoryId": "cat_tables",
   "materialType": "stone",
   "material": { "en": "White marble", "fa": "مرمر سفید" },
+  "line": { "en": "Luna", "fa": "لونا" },
   "finish": { "en": "Polished", "fa": "براق" },
   "origin": null,
   "dimensions": { "length": 90, "width": 90, "height": 38, "weight": 95 },
@@ -584,7 +585,7 @@ Request body — `ProductInput` (`src/domain/product.ts`):
 ```
 Validation:
 * `slug` kebab-case & unique (`409 SLUG_TAKEN`); `sku` 1–40 & unique (`409 CONFLICT`, field `sku`).
-* All `LocalizedText` fields require non-empty `en`. `finish`/`origin` may be `null`.
+* All `LocalizedText` fields require non-empty `en`. `line`/`finish`/`origin` may be `null`.
 * `categoryId` must exist (`422`, field `categoryId`).
 * `pricing`: integers ≥ 0; for `range`, `max ≥ min`.
 * `dimensions.*`: number ≥ 0 or null.

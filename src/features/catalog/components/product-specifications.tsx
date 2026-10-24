@@ -17,6 +17,7 @@ export function ProductSpecifications({ product }: { product: Product }) {
     [t("category"), text(product.category.name)],
     [t("materialType"), tMaterial(product.materialType)],
     [t("material"), text(product.material)],
+    [t("line"), product.line ? text(product.line) : null],
     [t("finish"), product.finish ? text(product.finish) : null],
     [t("origin"), product.origin ? text(product.origin) : null],
     [t("length"), cm(length)],

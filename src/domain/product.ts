@@ -76,6 +76,8 @@ export interface Product {
   category: ProductCategoryRef;
   materialType: MaterialType;
   material: LocalizedText;
+  /** Product line / collection, e.g. "Luna". */
+  line: LocalizedText | null;
   finish: LocalizedText | null;
   origin: LocalizedText | null;
   dimensions: Dimensions;
@@ -145,6 +147,8 @@ export interface ProductInput {
   categoryId: string;
   materialType: MaterialType;
   material: LocalizedText;
+  /** Product line / collection, e.g. "Luna". */
+  line: LocalizedText | null;
   finish: LocalizedText | null;
   origin: LocalizedText | null;
   dimensions: Dimensions;

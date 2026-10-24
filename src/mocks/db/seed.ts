@@ -99,6 +99,7 @@ type SeedProduct = Pick<StoredProduct, "id" | "slug" | "sku" | "title" | "shortD
 
 function product(input: SeedProduct, index: number): StoredProduct {
   return {
+    line: null,
     finish: null,
     origin: t("Iran", "ایران"),
     dimensions: { length: null, width: null, height: null, weight: null },

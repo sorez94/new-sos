@@ -26,7 +26,7 @@ export function ImageManager() {
   const [uploading, setUploading] = useState(false);
   const [urlDraft, setUrlDraft] = useState("");
 
-  const defaultAlt = () => ({ en: getValues("title.en"), fa: getValues("title.fa") });
+  const defaultAlt = () => ({ en: getValues("line.en"), fa: getValues("line.fa") });
 
   const upload = async (files: FileList | null) => {
     if (!files?.length) return;

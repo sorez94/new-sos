@@ -62,6 +62,7 @@ export const productInputSchema = z.object({
   categoryId: z.string().min(1),
   materialType: z.enum(materialTypes),
   material: localized,
+  line: optionalLocalized,
   finish: optionalLocalized,
   origin: optionalLocalized,
   dimensions: z.object({ length: nullableMeasure, width: nullableMeasure, height: nullableMeasure, weight: nullableMeasure }),
